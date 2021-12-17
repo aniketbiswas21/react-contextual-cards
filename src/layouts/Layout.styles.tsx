@@ -25,4 +25,5 @@ export const ContentContainer = styled.div`
   perspective: 1px;
   position: relative;
   padding: 1rem;
+  overflow-x: hidden;
 `;

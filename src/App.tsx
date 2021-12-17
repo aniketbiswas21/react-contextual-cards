@@ -7,6 +7,7 @@ import { globalTheme } from "./theme/theme";
 import HC3 from "./components/HC3/HC3";
 import HC5 from "./components/HC5/HC5";
 import HC6 from "./components/HC6/HC6";
+import HC9 from "./components/HC9/HC9";
 
 const App = () => {
   return (
@@ -18,6 +19,8 @@ const App = () => {
         <HC6 />
         <br />
         <HC5 />
+        <br />
+        <HC9 />
       </Layout>
     </ThemeProvider>
   );
