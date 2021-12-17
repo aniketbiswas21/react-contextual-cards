@@ -24,4 +24,5 @@ export const ContentContainer = styled.div`
   width: 100%;
   perspective: 1px;
   position: relative;
+  padding: 1rem;
 `;

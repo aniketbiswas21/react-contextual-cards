@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import "typeface-roboto";
 
 export const GlobalStyles = createGlobalStyle`
   *,
@@ -11,8 +12,7 @@ export const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.text};
     margin: 0;
     padding: 0;
-    font-family: "Lato", sans-serif;
-    transition: all 0.25s linear;
+    font-family: "Roboto", sans-serif;
     overflow-x: hidden;
   }
   /* width */

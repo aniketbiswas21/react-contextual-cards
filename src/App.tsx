@@ -1,5 +1,6 @@
 import React from "react";
 import { ThemeProvider } from "styled-components";
+import HC3 from "./components/HC3/HC3";
 
 import Layout from "./layouts/Layout";
 import { GlobalStyles } from "./theme/global";
@@ -10,7 +11,7 @@ const App = () => {
     <ThemeProvider theme={globalTheme}>
       <GlobalStyles />
       <Layout>
-        <h1>Hello World</h1>
+        <HC3 />
       </Layout>
     </ThemeProvider>
   );
