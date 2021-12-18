@@ -4,7 +4,7 @@ import { ThemeProvider } from "styled-components";
 import Layout from "./layouts/Layout";
 import { GlobalStyles } from "./theme/global";
 import { globalTheme } from "./theme/theme";
-import CardGroup, { CardGroupType } from "./components/CardGroup/CardGroup";
+import CardGroup from "./components/CardGroup/CardGroup";
 import useAPIHandler from "./hooks/useAPIHandler";
 
 const App = () => {
@@ -16,13 +16,18 @@ const App = () => {
       <Layout>
         {status === "idle" && <p>Loading...</p>}
         {status === "error" && <p>Error: {error}</p>}
-        {status === "done" && (
+        {status === "done" && data && (
           <>
-            <CardGroup cardType={CardGroupType.HC3} isScrollable={true} />
-            <CardGroup cardType={CardGroupType.HC1} isScrollable={false} />
-            <CardGroup cardType={CardGroupType.HC5} isScrollable={true} />
-            <CardGroup cardType={CardGroupType.HC6} isScrollable={true} />
-            <CardGroup cardType={CardGroupType.HC9} isScrollable={true} />
+            {data.card_groups.map((item: any) => (
+              <CardGroup
+                key={item.id}
+                cardType={item.design_type}
+                isScrollable={item.is_scrollable}
+                cards={item.cards}
+                sectionHeader={item.name}
+                height={item.height ? item.height : null}
+              />
+            ))}
           </>
         )}
       </Layout>

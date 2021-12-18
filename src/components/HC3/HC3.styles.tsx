@@ -1,7 +1,13 @@
 import styled from "styled-components";
+import { ImageEntity } from "../../types/types";
 
 interface ActionProps {
   visibility: boolean;
+}
+
+interface HC3CardProps {
+  backgroundColor?: string;
+  backgroundImage?: ImageEntity;
 }
 
 export const HC3CardContainer = styled.div`
@@ -9,18 +15,24 @@ export const HC3CardContainer = styled.div`
   flex-direction: row;
   width: 100%;
   overflow: hidden;
-  background-color: #ffffff;
+  background-color: #fff;
   border-radius: 12px;
 `;
 
-export const HC3Card = styled.div`
+export const HC3Card = styled.div<HC3CardProps>`
   display: flex;
   width: 100%;
   min-width: 100%;
   flex-direction: column;
+  justify-content: flex-end;
   padding: 2rem;
-  height: fit-content;
-  background-color: #454aa6;
+  height: 350px;
+  background-color: ${({ backgroundColor }) =>
+    backgroundColor ? backgroundColor : "#454aa6"};
+  background-image: ${({ backgroundImage }) =>
+    backgroundImage ? `url(${backgroundImage.image_url})` : "none"};
+  background-size: contain;
+  background-repeat: no-repeat;
   color: #fff;
   border-radius: 12px;
 

@@ -35,7 +35,7 @@ const useAPIHandler = () => {
     };
   }, []);
 
-  return [data, error, status];
+  return [data, error, status] as [any, any, "idle" | "done" | "error"];
 };
 
 export default useAPIHandler;

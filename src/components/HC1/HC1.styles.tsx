@@ -1,8 +1,13 @@
 import styled from "styled-components";
 import { HC6Card } from "../HC6/HC6.styles";
 
-export const HC1Card = styled(HC6Card)`
-  background: #fbaf03;
+interface HC1CardProps {
+  backgroundColor?: string;
+}
+
+export const HC1Card = styled(HC6Card)<HC1CardProps>`
+  background: ${({ backgroundColor }) =>
+    backgroundColor ? backgroundColor : "#fbaf03"};
 
   .card-img {
     height: 35px;
