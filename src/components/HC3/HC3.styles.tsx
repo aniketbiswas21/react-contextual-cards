@@ -46,12 +46,14 @@ export const HC3Card = styled.div`
     font-size: 30px;
     line-height: 35px;
     word-wrap: break-word;
+    white-space: pre-wrap;
     margin-bottom: 0;
   }
 
   .subtitle {
     font-style: normal;
     font-weight: normal;
+    white-space: pre-wrap;
     font-size: 12px;
     line-height: 18px;
   }

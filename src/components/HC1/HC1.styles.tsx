@@ -15,6 +15,7 @@ export const HC1Card = styled(HC6Card)`
     font-size: 14px;
     line-height: 16px;
     margin: 0;
+    white-space: pre-wrap;
   }
 
   .sub-heading {

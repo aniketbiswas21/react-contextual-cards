@@ -4,7 +4,8 @@ export const HC6Card = styled.div`
   display: flex;
   width: 100%;
   min-width: 100%;
-  height: 60px;
+  min-height: 60px;
+  height: fit-content;
   padding: 1rem;
   background-color: #ffffff;
   border-radius: 12px;
@@ -37,5 +38,6 @@ export const HC6Card = styled.div`
     font-weight: 500;
     font-size: 14px;
     line-height: 16px;
+    white-space: pre-wrap;
   }
 `;

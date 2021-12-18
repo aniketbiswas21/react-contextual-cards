@@ -5,6 +5,7 @@ export const LayoutContainer = styled.div`
   flex-direction: column;
   justify-content: stretch;
   position: relative;
+  width: 100%;
 `;
 
 export const NavContainer = styled.div`
