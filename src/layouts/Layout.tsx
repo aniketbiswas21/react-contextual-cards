@@ -23,7 +23,7 @@ const Layout: React.FC<IProps> = ({ children, refetchData }) => {
       <NavContainer>
         <Nav />
       </NavContainer>
-      <PullToRefresh onRefresh={onRefresh}>
+      <PullToRefresh onRefresh={onRefresh} className="refresh-container">
         <ContentContainer>{children}</ContentContainer>
       </PullToRefresh>
     </LayoutContainer>

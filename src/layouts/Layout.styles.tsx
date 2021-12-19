@@ -6,6 +6,10 @@ export const LayoutContainer = styled.div`
   justify-content: stretch;
   position: relative;
   width: 100%;
+
+  .refresh-block {
+    position: relative;
+  }
 `;
 
 export const NavContainer = styled.div`
