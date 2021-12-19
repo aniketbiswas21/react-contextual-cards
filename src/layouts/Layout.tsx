@@ -1,5 +1,10 @@
 import React, { useCallback } from "react";
-import PullToRefresh from "react-simple-pull-to-refresh";
+import {
+  PullToRefresh,
+  PullDownContent,
+  ReleaseContent,
+  RefreshContent,
+} from "react-js-pull-to-refresh";
 
 import Nav from "../components/Nav/Nav";
 import {
@@ -23,7 +28,14 @@ const Layout: React.FC<IProps> = ({ children, refetchData }) => {
       <NavContainer>
         <Nav />
       </NavContainer>
-      <PullToRefresh onRefresh={onRefresh} className="refresh-container">
+      <PullToRefresh
+        onRefresh={onRefresh}
+        pullDownContent={<PullDownContent />}
+        releaseContent={<ReleaseContent />}
+        refreshContent={<RefreshContent />}
+        pullDownThreshold={100}
+        startInvisible={true}
+      >
         <ContentContainer>{children}</ContentContainer>
       </PullToRefresh>
     </LayoutContainer>
