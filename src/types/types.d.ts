@@ -7,8 +7,9 @@ export interface HighlightEntity {
 }
 
 export interface ImageEntity {
-  image_type: string;
+  image_type: "ext" | "asset";
   image_url: string;
+  asset_type: string;
 }
 
 export interface CTAEntity {

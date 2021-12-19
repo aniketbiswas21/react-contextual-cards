@@ -1,11 +1,11 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useRef } from "react";
 
 const useLongPress = (
   onLongPress: Function,
   onClick: Function,
   { shouldPreventDefault = true, delay = 300 } = {}
 ) => {
-  const [longPressTriggered, setLongPressTriggered] = useState(false);
+  const longPressTriggered = useRef<boolean>(false);
   const timeout = useRef<NodeJS.Timeout>();
   const target = useRef<any>();
 
@@ -20,18 +20,18 @@ const useLongPress = (
       }
       timeout.current = setTimeout(() => {
         onLongPress(event);
-        setLongPressTriggered(true);
+        longPressTriggered.current = true;
       }, delay);
     },
     [onLongPress, delay, shouldPreventDefault]
   );
 
-  //   handles normal click events and cancels the long press event
+  // handles normal click events and cancels the long press event
   const clear = useCallback(
     (event, shouldTriggerClick = true) => {
       timeout.current && clearTimeout(timeout.current);
-      shouldTriggerClick && !longPressTriggered && onClick();
-      setLongPressTriggered(false);
+      shouldTriggerClick && !longPressTriggered.current && onClick(event);
+      longPressTriggered.current = false;
       if (shouldPreventDefault && target.current) {
         target.current.removeEventListener("touchend", preventDefault);
       }
@@ -40,7 +40,6 @@ const useLongPress = (
   );
 
   return {
-    //   TODO Fix typedefs
     onMouseDown: (e: any) => start(e),
     onTouchStart: (e: any) => start(e),
     onMouseUp: (e: any) => clear(e),

@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { CTAEntity, GradientEntity, ImageEntity } from "../../types/types";
-
 interface ActionProps {
   visibility: boolean;
 }
@@ -54,7 +53,13 @@ export const HC3Card = styled.div<HC3CardProps>`
   background: ${({ backgroundColor, backgroundGradient }) =>
     determineBackground(backgroundColor, backgroundGradient)};
   background-image: ${({ backgroundImage }) =>
-    backgroundImage ? `url(${backgroundImage.image_url})` : "none"};
+    backgroundImage
+      ? `url(${
+          backgroundImage.image_type === "ext"
+            ? backgroundImage.image_url
+            : `../../assets/images/${backgroundImage.asset_type}`
+        })`
+      : "none"};
   background-size: contain;
   background-repeat: no-repeat;
   color: #fff;

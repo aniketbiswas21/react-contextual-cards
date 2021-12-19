@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { ajax } from "rxjs/ajax";
 import { map, catchError } from "rxjs/operators";
 import { of } from "rxjs";
@@ -19,11 +19,9 @@ const useAPIHandler = () => {
   useEffect(() => {
     const subscription = apiObservable$.subscribe({
       next: (data) => {
-        console.log(data);
         setData(data);
       },
       error: (error) => {
-        console.error(error);
         setError(error);
         setStatus("error");
       },
@@ -34,6 +32,7 @@ const useAPIHandler = () => {
     return () => {
       subscription.unsubscribe();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [refetch]);
 
   const refetchData = () => {

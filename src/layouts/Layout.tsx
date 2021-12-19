@@ -34,6 +34,7 @@ const Layout: React.FC<IProps> = ({ children, refetchData }) => {
         releaseContent={<ReleaseContent />}
         refreshContent={<RefreshContent />}
         pullDownThreshold={100}
+        triggerHeight={100}
         startInvisible={true}
       >
         <ContentContainer>{children}</ContentContainer>

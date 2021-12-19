@@ -6,6 +6,7 @@ import { GlobalStyles } from "./theme/global";
 import { globalTheme } from "./theme/theme";
 import CardGroup from "./components/CardGroup/CardGroup";
 import useAPIHandler from "./hooks/useAPIHandler";
+import Indicator from "./pages/Indicator/Indicator";
 
 const App = () => {
   const [data, error, status, refetchData] = useAPIHandler();
@@ -14,8 +15,10 @@ const App = () => {
     <ThemeProvider theme={globalTheme}>
       <GlobalStyles />
       <Layout refetchData={refetchData}>
-        {status === "idle" && <p>Loading...</p>}
-        {status === "error" && <p>Error: {error}</p>}
+        {status === "idle" && <Indicator status={status} />}
+        {status === "error" && console.error(error) && (
+          <Indicator status={status} />
+        )}
         {status === "done" && data && (
           <>
             {data.card_groups.map((item: any) => (

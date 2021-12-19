@@ -1,14 +1,17 @@
-import React from "react";
 import { HighlightEntity } from "../types/types";
 
 const useStyleGenerator = () => {
   const generateStyles = (entity: HighlightEntity) => {
+    // generates an array of text including "{}"
     let textArray: string[] = entity.text.split(" ");
 
     let bracketIndex: number = 0;
+
+    // iterating over all the highlighted entities
     entity.entities.forEach((entityItem, i) => {
       let style: string = "";
 
+      // creates the style for the highlighted entity
       Object.keys(entityItem).forEach((attribute: string) => {
         if (attribute !== "text") {
           // @ts-ignore
@@ -16,6 +19,7 @@ const useStyleGenerator = () => {
         }
       });
 
+      // iterating over the text array and replaces the "{}" with the styled text
       textArray.forEach((textItem, currentIndex) => {
         if (textItem.includes("{}") && i === bracketIndex) {
           const finalHTML = textItem.replace(

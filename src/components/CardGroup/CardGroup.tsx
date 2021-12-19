@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import useActionHandler from "../../hooks/useActionHandler";
 
 import HC1 from "../HC1/HC1";
 import HC3 from "../HC3/HC3";
@@ -26,11 +27,19 @@ interface CardGroupProps {
 const renderCard = (
   cardType: CardGroupType,
   data: any,
+  onRemind: (
+    name: string,
+    setShowActionBar: React.Dispatch<React.SetStateAction<boolean>>
+  ) => void,
+  onDismiss: (
+    name: string,
+    setShowActionBar: React.Dispatch<React.SetStateAction<boolean>>
+  ) => void,
   cardHeight?: string
 ) => {
   switch (cardType) {
     case CardGroupType.HC3:
-      return <HC3 cardData={data} />;
+      return <HC3 cardData={data} onRemind={onRemind} onDismiss={onDismiss} />;
     case CardGroupType.HC5:
       return <HC5 cardData={data} />;
     case CardGroupType.HC6:
@@ -50,16 +59,19 @@ const CardGroup: React.FC<CardGroupProps> = ({
   cards,
   height,
 }) => {
+  const [cardsData, setCardsData] = useState(cards);
+  const [onRemindLater, onDismiss] = useActionHandler(cardsData, setCardsData);
+
   return (
     <>
       <CardGroupContainer isScrollable={isScrollable}>
-        {cards.map((cardData, index) => (
+        {cardsData.map((cardData, index) => (
           <CardGroupItem
             key={index}
             isScrollable={isScrollable}
             cardType={cardType}
           >
-            {renderCard(cardType, cardData, height)}
+            {renderCard(cardType, cardData, onRemindLater, onDismiss, height)}
           </CardGroupItem>
         ))}
       </CardGroupContainer>
