@@ -31,4 +31,5 @@ export const ContentContainer = styled.div`
   position: relative;
   padding: 1rem;
   overflow-x: hidden;
+  z-index: 2;
 `;
