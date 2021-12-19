@@ -1,5 +1,6 @@
 import React from "react";
 import { ThemeProvider } from "styled-components";
+import { BrowserView, MobileView } from "react-device-detect";
 
 import Layout from "./layouts/Layout";
 import { GlobalStyles } from "./theme/global";
@@ -21,15 +22,24 @@ const App = () => {
         )}
         {status === "done" && data && (
           <>
-            {data.card_groups.map((item: any) => (
-              <CardGroup
-                key={item.id}
-                cardType={item.design_type}
-                isScrollable={item.is_scrollable}
-                cards={item.cards}
-                height={item.height ? item.height : null}
-              />
-            ))}
+            <BrowserView>
+              <h3 style={{ textAlign: "center" }}>
+                This website is currently supported only for mobile devices.
+                Please switch to a mobile device or simulate one using inspect
+                element to view the same.
+              </h3>
+            </BrowserView>
+            <MobileView>
+              {data.card_groups.map((item: any) => (
+                <CardGroup
+                  key={item.id}
+                  cardType={item.design_type}
+                  isScrollable={item.is_scrollable}
+                  cards={item.cards}
+                  height={item.height ? item.height : null}
+                />
+              ))}
+            </MobileView>
           </>
         )}
       </Layout>
