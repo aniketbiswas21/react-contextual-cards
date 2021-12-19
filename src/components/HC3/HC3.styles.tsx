@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ImageEntity } from "../../types/types";
+import { CTAEntity, GradientEntity, ImageEntity } from "../../types/types";
 
 interface ActionProps {
   visibility: boolean;
@@ -8,7 +8,31 @@ interface ActionProps {
 interface HC3CardProps {
   backgroundColor?: string;
   backgroundImage?: ImageEntity;
+  backgroundGradient?: GradientEntity;
+  cta?: CTAEntity[];
 }
+
+const determineBackground = (
+  backgroundColor?: string,
+  backgroundGradient?: GradientEntity
+) => {
+  if (backgroundGradient) {
+    let gradientString = `linear-gradient(${
+      backgroundGradient.angle ? `${backgroundGradient.angle}deg` : "0deg"
+    }`;
+
+    backgroundGradient.colors.forEach((color: string) => {
+      gradientString += `, ${color}`;
+    });
+
+    gradientString += ")";
+    return gradientString;
+  } else if (backgroundColor) {
+    return backgroundColor;
+  } else {
+    return "#FFF";
+  }
+};
 
 export const HC3CardContainer = styled.div`
   display: flex;
@@ -27,8 +51,8 @@ export const HC3Card = styled.div<HC3CardProps>`
   justify-content: flex-end;
   padding: 2rem;
   height: 350px;
-  background-color: ${({ backgroundColor }) =>
-    backgroundColor ? backgroundColor : "#454aa6"};
+  background: ${({ backgroundColor, backgroundGradient }) =>
+    determineBackground(backgroundColor, backgroundGradient)};
   background-image: ${({ backgroundImage }) =>
     backgroundImage ? `url(${backgroundImage.image_url})` : "none"};
   background-size: contain;
@@ -71,10 +95,11 @@ export const HC3Card = styled.div<HC3CardProps>`
   }
 
   .action-btn {
-    background-color: #000;
+    background-color: ${({ cta }) =>
+      cta && cta.length > 0 ? cta[0].bg_color : "#000"};
     border-radius: 6px;
     width: 128px;
-    color: #fff;
+    color: ${({ cta }) => (cta && cta.length > 0 ? cta[0].text_color : "#fff")};
     border: none;
     padding: 0.8rem 1rem;
   }

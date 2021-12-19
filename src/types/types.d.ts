@@ -6,9 +6,21 @@ export interface HighlightEntity {
   }[];
 }
 
-interface ImageEntity {
+export interface ImageEntity {
   image_type: string;
   image_url: string;
+}
+
+export interface CTAEntity {
+  bg_color: string;
+  text: string;
+  text_color: string;
+  url: string;
+}
+
+export interface GradientEntity {
+  colors: string[];
+  angle: number | null;
 }
 
 export interface CardData {
@@ -21,4 +33,6 @@ export interface CardData {
   title: string;
   url: string;
   bg_color?: string;
+  cta?: CTAEntity[];
+  bg_gradient?: GradientEntity;
 }

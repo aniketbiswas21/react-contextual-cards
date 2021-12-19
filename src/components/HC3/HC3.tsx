@@ -49,7 +49,7 @@ const HC3: React.FC<HC3CardProps> = ({ cardData }) => {
     setShowActionBar(true);
   }, []);
 
-  const onClick = useCallback(() => null, []);
+  const onClick = useCallback(() => {}, []);
 
   const onRemindLater = useCallback(() => {
     console.log("Remind");
@@ -81,6 +81,8 @@ const HC3: React.FC<HC3CardProps> = ({ cardData }) => {
         {...longPressEvent}
         backgroundImage={cardData.bg_image}
         backgroundColor={cardData.bg_color}
+        backgroundGradient={cardData.bg_gradient}
+        cta={cardData.cta}
       >
         {/* <img className="logo" src={HC3Logo} alt="HC3 Logo" /> */}
         <div className="heading-box">
@@ -108,10 +110,16 @@ const HC3: React.FC<HC3CardProps> = ({ cardData }) => {
             className="action-btn"
             onClick={(e) => {
               e.stopPropagation();
-              window.open(cardData.url);
+              window.open(
+                cardData.cta && cardData.cta.length > 0
+                  ? cardData.cta[0].url
+                  : cardData.url
+              );
             }}
           >
-            {cardData.name}
+            {cardData.cta && cardData.cta.length > 0
+              ? cardData.cta[0].text
+              : cardData.name}
           </button>
         </div>
       </HC3Card>

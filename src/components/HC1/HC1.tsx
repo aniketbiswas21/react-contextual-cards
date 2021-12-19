@@ -13,7 +13,10 @@ const HC1: React.FC<HC1Props> = ({ cardData }) => {
   const [generateStyles, createMarkup] = useStyleGenerator();
 
   return (
-    <HC1Card backgroundColor={cardData.bg_color}>
+    <HC1Card
+      backgroundColor={cardData.bg_color}
+      backgroundGradient={cardData.bg_gradient}
+    >
       <div className="content-block">
         <img
           src={cardData.icon ? cardData.icon.image_url : profile}

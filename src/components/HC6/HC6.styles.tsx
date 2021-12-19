@@ -1,13 +1,43 @@
 import styled from "styled-components";
 
-export const HC6Card = styled.div`
+import { GradientEntity } from "../../types/types";
+
+interface HC6CardProps {
+  backgroundColor?: string;
+  backgroundGradient?: GradientEntity;
+}
+
+const determineBackground = (
+  backgroundColor?: string,
+  backgroundGradient?: GradientEntity
+) => {
+  if (backgroundGradient) {
+    let gradientString = `linear-gradient(${
+      backgroundGradient.angle ? `${backgroundGradient.angle}deg` : "0deg"
+    }`;
+
+    backgroundGradient.colors.forEach((color: string) => {
+      gradientString += `, ${color}`;
+    });
+
+    gradientString += ")";
+    return gradientString;
+  } else if (backgroundColor) {
+    return backgroundColor;
+  } else {
+    return "#FFF";
+  }
+};
+
+export const HC6Card = styled.div<HC6CardProps>`
   display: flex;
   width: 100%;
   min-width: 100%;
   min-height: 60px;
   height: fit-content;
   padding: 1rem;
-  background-color: #ffffff;
+  background: ${({ backgroundColor, backgroundGradient }) =>
+    determineBackground(backgroundColor, backgroundGradient)};
   border-radius: 12px;
   justify-content: space-between;
 

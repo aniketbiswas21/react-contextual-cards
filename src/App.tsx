@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { ThemeProvider } from "styled-components";
 
 import Layout from "./layouts/Layout";
@@ -8,12 +8,12 @@ import CardGroup from "./components/CardGroup/CardGroup";
 import useAPIHandler from "./hooks/useAPIHandler";
 
 const App = () => {
-  const [data, error, status] = useAPIHandler();
+  const [data, error, status, refetchData] = useAPIHandler();
 
   return (
     <ThemeProvider theme={globalTheme}>
       <GlobalStyles />
-      <Layout>
+      <Layout refetchData={refetchData}>
         {status === "idle" && <p>Loading...</p>}
         {status === "error" && <p>Error: {error}</p>}
         {status === "done" && data && (
@@ -24,7 +24,6 @@ const App = () => {
                 cardType={item.design_type}
                 isScrollable={item.is_scrollable}
                 cards={item.cards}
-                sectionHeader={item.name}
                 height={item.height ? item.height : null}
               />
             ))}

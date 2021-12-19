@@ -5,11 +5,7 @@ import HC3 from "../HC3/HC3";
 import HC5 from "../HC5/HC5";
 import HC6 from "../HC6/HC6";
 import HC9 from "../HC9/HC9";
-import {
-  CardGroupContainer,
-  CardGroupHeader,
-  CardGroupItem,
-} from "./CardGroup.styles";
+import { CardGroupContainer, CardGroupItem } from "./CardGroup.styles";
 
 export enum CardGroupType {
   HC1 = "HC1",
@@ -23,7 +19,6 @@ interface CardGroupProps {
   cardType: CardGroupType;
   isScrollable: boolean;
   cards: any[];
-  sectionHeader: string;
   height?: string;
 }
 
@@ -53,12 +48,10 @@ const CardGroup: React.FC<CardGroupProps> = ({
   cardType,
   isScrollable,
   cards,
-  sectionHeader,
   height,
 }) => {
   return (
     <>
-      <CardGroupHeader>{sectionHeader}</CardGroupHeader>
       <CardGroupContainer isScrollable={isScrollable}>
         {cards.map((cardData, index) => (
           <CardGroupItem

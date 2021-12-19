@@ -1,13 +1,37 @@
 import styled from "styled-components";
+import { GradientEntity } from "../../types/types";
 import { HC6Card } from "../HC6/HC6.styles";
 
 interface HC1CardProps {
   backgroundColor?: string;
+  backgroundGradient?: GradientEntity;
 }
 
+const determineBackground = (
+  backgroundColor?: string,
+  backgroundGradient?: GradientEntity
+) => {
+  if (backgroundGradient) {
+    let gradientString = `linear-gradient(${
+      backgroundGradient.angle ? `${backgroundGradient.angle}deg` : "0deg"
+    }`;
+
+    backgroundGradient.colors.forEach((color: string) => {
+      gradientString += `, ${color}`;
+    });
+
+    gradientString += ")";
+    return gradientString;
+  } else if (backgroundColor) {
+    return backgroundColor;
+  } else {
+    return "#fbaf03";
+  }
+};
+
 export const HC1Card = styled(HC6Card)<HC1CardProps>`
-  background: ${({ backgroundColor }) =>
-    backgroundColor ? backgroundColor : "#fbaf03"};
+  background: ${({ backgroundColor, backgroundGradient }) =>
+    determineBackground(backgroundColor, backgroundGradient)};
 
   .card-img {
     height: 35px;
